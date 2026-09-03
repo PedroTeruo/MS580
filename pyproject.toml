@@ -1,0 +1,13 @@
+[project]
+name = "ms580"
+version = "0.1.0"
+description = "Codigos da disciplina MS580"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.11.1",
+    "networkx>=3.6.1",
+    "numpy>=2.4.6",
+    "pandas>=3.0.5",
+    "scikit-fuzzy>=0.5.0",
+    "scikit-learn>=1.9.0",
+]
