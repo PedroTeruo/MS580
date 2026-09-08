@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 #---------------------------------------------------------
 # Definindo os domínios
-massa = ctrl.Antecedent(np.arange(47, 82, 0.1), 'Massa')
+massa = ctrl.Antecedent(np.arange(47, 81.1, 0.1), 'Massa')
 altura = ctrl.Antecedent(np.arange(157, 184, 1), 'Altura')
 grau_risco = ctrl.Consequent(np.arange(18, 36, 1), 'Grau de Risco')
 
@@ -26,7 +26,7 @@ altura['Média'] = fuzzy.trimf(altura.universe, [167, 170, 173])
 altura['Média Alta'] = fuzzy.trimf(altura.universe, [172, 175, 178])
 altura['Alta'] = fuzzy.trapmf(altura.universe, [177, 180, 183, 183])
 
-grau_risco['Saudável'] = fuzzy.trapmf(grau_risco.universe, [18, 18, 23, 35])
+grau_risco['Saudável'] = fuzzy.trapmf(grau_risco.universe, [18, 18, 23, 25])
 grau_risco['Moderado'] = fuzzy.trapmf(grau_risco.universe, [24, 25, 27, 30])
 grau_risco['Alto'] = fuzzy.trapmf(grau_risco.universe, [29, 30, 35, 35])
 
@@ -45,29 +45,29 @@ r3 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Saudável'])
 r4 = ctrl.Rule(massa['Baixa'] & altura['Média Alta'], grau_risco['Saudável'])
 r5 = ctrl.Rule(massa['Baixa'] & altura['Alta'], grau_risco['Saudável'])
 
-r6 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Moderado'])
-r7 = ctrl.Rule(massa['Baixa'] & altura['Média Baixa'], grau_risco['Saudável'])
-r8 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Saudável'])
-r9 = ctrl.Rule(massa['Baixa'] & altura['Média Alta'], grau_risco['Saudável'])
-r10 = ctrl.Rule(massa['Baixa'] & altura['Alta'], grau_risco['Saudável'])
+r6 = ctrl.Rule(massa['Média Baixa'] & altura['Média'], grau_risco['Moderado'])
+r7 = ctrl.Rule(massa['Média Baixa'] & altura['Média Baixa'], grau_risco['Saudável'])
+r8 = ctrl.Rule(massa['Média Baixa'] & altura['Média'], grau_risco['Saudável'])
+r9 = ctrl.Rule(massa['Média Baixa'] & altura['Média Alta'], grau_risco['Saudável'])
+r10 = ctrl.Rule(massa['Média Baixa'] & altura['Alta'], grau_risco['Saudável'])
 
-r11 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Moderado'])
-r12 = ctrl.Rule(massa['Baixa'] & altura['Média Baixa'], grau_risco['Moderado'])
-r13 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Saudável'])
-r14 = ctrl.Rule(massa['Baixa'] & altura['Média Alta'], grau_risco['Saudável'])
-r15 = ctrl.Rule(massa['Baixa'] & altura['Alta'], grau_risco['Saudável'])
+r11 = ctrl.Rule(massa['Média'] & altura['Média'], grau_risco['Moderado'])
+r12 = ctrl.Rule(massa['Média'] & altura['Média Baixa'], grau_risco['Moderado'])
+r13 = ctrl.Rule(massa['Média'] & altura['Média'], grau_risco['Saudável'])
+r14 = ctrl.Rule(massa['Média'] & altura['Média Alta'], grau_risco['Saudável'])
+r15 = ctrl.Rule(massa['Média'] & altura['Alta'], grau_risco['Saudável'])
 
-r16 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Moderado'])
-r17 = ctrl.Rule(massa['Baixa'] & altura['Média Baixa'], grau_risco['Moderado'])
-r18 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Moderado'])
-r19 = ctrl.Rule(massa['Baixa'] & altura['Média Alta'], grau_risco['Saudável'])
-r20 = ctrl.Rule(massa['Baixa'] & altura['Alta'], grau_risco['Saudável'])
+r16 = ctrl.Rule(massa['Média Alta'] & altura['Média'], grau_risco['Moderado'])
+r17 = ctrl.Rule(massa['Média Alta'] & altura['Média Baixa'], grau_risco['Moderado'])
+r18 = ctrl.Rule(massa['Média Alta'] & altura['Média'], grau_risco['Moderado'])
+r19 = ctrl.Rule(massa['Média Alta'] & altura['Média Alta'], grau_risco['Saudável'])
+r20 = ctrl.Rule(massa['Média Alta'] & altura['Alta'], grau_risco['Saudável'])
 
-r21 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Alto'])
-r22 = ctrl.Rule(massa['Baixa'] & altura['Média Baixa'], grau_risco['Moderado'])
-r23 = ctrl.Rule(massa['Baixa'] & altura['Média'], grau_risco['Moderado'])
-r24 = ctrl.Rule(massa['Baixa'] & altura['Média Alta'], grau_risco['Moderado'])
-r25 = ctrl.Rule(massa['Baixa'] & altura['Alta'], grau_risco['Saudável'])
+r21 = ctrl.Rule(massa['Alta'] & altura['Média'], grau_risco['Alto'])
+r22 = ctrl.Rule(massa['Alta'] & altura['Média Baixa'], grau_risco['Moderado'])
+r23 = ctrl.Rule(massa['Alta'] & altura['Média'], grau_risco['Moderado'])
+r24 = ctrl.Rule(massa['Alta'] & altura['Média Alta'], grau_risco['Moderado'])
+r25 = ctrl.Rule(massa['Alta'] & altura['Alta'], grau_risco['Saudável'])
 
 conjunto_regras = [r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13, r14, r15, r16, r17, r18, r19, r20, r21, r22, r23, r24, r25]
 #---------------------------------------------------------
@@ -77,11 +77,11 @@ grau_risco_simulacao = ctrl.ControlSystemSimulation(grau_risco_ctrl)
 
 #---------------------------------------------------------
 # Inputs
-grau_risco_simulacao.input['Massa'] = 59.0  # (float(input()))
-grau_risco_simulacao.input['Altura'] = 164 # (int(input()))
+grau_risco_simulacao.input['Massa'] = 81.0  # (float(input()))
+grau_risco_simulacao.input['Altura'] = 180 # (int(input()))
 
 #---------------------------------------------------------
 # Saída
 grau_risco_simulacao.compute()
 print(grau_risco_simulacao.output['Grau de Risco'])
-# ERRO de ~1
+# ERRO de ~0.3
