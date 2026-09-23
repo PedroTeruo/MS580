@@ -12,7 +12,7 @@ v = np.linspace(-500, 500, 500)
 pop = ctrl.Antecedent(u, "population")
 speed = ctrl.Consequent(v, "increase-rate")
 
-pop['low'] = fuzz.trapmf(pop.universe, [0, 0, 25, 50])
+pop['low'] = fuzz.trimf(pop.universe, [0,25, 50])
 pop['lowmid'] = fuzz.trimf(pop.universe, [25, 50, 75])
 pop['medium'] = fuzz.trimf(pop.universe, [50, 75, 125])
 pop['highmid'] = fuzz.trimf(pop.universe, [75, 125, 375])
@@ -24,7 +24,6 @@ speed['nlow'] = fuzz.trimf(speed.universe, [-125, -50, 25])
 speed['plow'] = fuzz.trimf(speed.universe, [-25, 50, 125])
 speed['pmedium'] = fuzz.trimf(speed.universe, [125, 250, 375])
 speed['phigh'] = fuzz.trapmf(speed.universe, [250, 375, 500, 500])
-
 
 rule0 = ctrl.Rule(antecedent=(pop['low']),
                   consequent=speed['plow'], label='rule low')
@@ -66,6 +65,5 @@ ax.set_ylabel('P')
 ax.set_title('P(t)')
 ax.grid(True)
 line1, = ax.plot(time, p)
-# ax.plot(time, p, 'bo', markersize=5)
 plt.show()
 
